@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin_header :: baseHeader(~{::title})">
+	<title>Ajouter/modifier catégories</title>
+</head>
+<body>
+	<div th:replace="fragments/admin_header :: admin_header"></div>
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Bienvenue Admin , Ajouter une cat&eacutegorie</h1>
+
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<form th:action="@{/admin/categories/add}" method="post"
+					th:object="${categorie}">
+					<input type="hidden" name="id" th:field="*{id}">
+					<div class="form-group">
+						<label for="name">Nom</label> <input type="text"
+							class="form-control" required th:field="*{nom}"
+							name="Nom categorie" id="name" placeholder="Entrer le nom">
+
+					</div>
+
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

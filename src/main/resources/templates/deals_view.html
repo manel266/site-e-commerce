@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragments/admin_header :: baseHeader(~{::title})">
+	<title>Details du deal</title>
+</head>
+<body>
+
+	<div th:replace="fragments/admin_header :: admin_header"></div>
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Bienvenue , Les d&eacutetails d'un deal</h1>
+
+	</div>
+	<div class="container mt-5">
+		<div class="row" style="margin-top: 20px" th:each="deal : ${deals}">
+			<div class="col-sm-5 d-flex justify-content-center">
+				<img id="imgPreview" th:src="@{${deal.image}}"
+				  style="margin-top: 20px;height:100%; width:100%;" alt=" ">
+			</div>
+			<div class="col-sm-7 mt-5">
+				<h2 th:text="${deal.nom}"></h2>
+
+				Ancien prix :
+				<p th:text="${deal.ancien_prix}"></p>
+				Nouveau prix :
+				<p th:text="${deal.nouveau_prix}"></p>
+				Pourcentage :
+				<p th:text="${deal.pourcentage}"></p>
+				Description :
+				<p th:text="${deal.description}"></p>
+				Date fin :
+				<p style="color: #FF0000" th:text="${deal.temps_rest}"></p>
+				Quantité :
+				<p th:text="${deal.quantite}"></p>
+				Nombre de vente :
+				<p>nb vente</p>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

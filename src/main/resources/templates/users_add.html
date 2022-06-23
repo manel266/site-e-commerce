@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin_header :: baseHeader(~{::title})">
+	<title>Ajouter/modifier utilisateurs</title>
+</head>
+<body>
+	<div th:replace="fragments/admin_header :: admin_header"></div>
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Bienvenue Admin , Ajouter un client</h1>
+
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<form th:action="@{/admin/users/add}" method="post"
+					th:object="${user}">
+					
+					<input type="hidden" name="id" th:field="*{id}">
+					
+					<div class="form-group">
+						<label for="name">Username</label> <input type="text"
+							class="form-control" required th:field="*{userName}" name="username"
+							id="prenom" placeholder="Entrer le username">
+
+					</div>
+					<div class="form-group">
+						<label for="name">Nom</label> <input type="text"
+							class="form-control" required th:field="*{nom}" name="nom"
+							id="name" placeholder="Entrer le nom">
+
+					</div>
+
+					<div class="form-group">
+						<label for="name">Prenom</label> <input type="text"
+							class="form-control" required th:field="*{prenom}" name="prenom"
+							id="prenom" placeholder="Entrer le prenom">
+
+					</div>
+
+					<div class="form-group">
+						<label for="name">Email</label> <input type="email"
+							class="form-control" required th:field="*{email}" name="email"
+							id="email" placeholder="Entrer l'adresse mail">
+
+					</div>
+
+					<div class="form-group">
+						<label for="name">Mot de passe</label> <input type="text"
+							class="form-control" required th:field="*{password}" name="password" id="password"
+							placeholder="Entrer le mot de passe">
+
+					</div>
+
+
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

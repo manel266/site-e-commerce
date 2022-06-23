@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin_header :: baseHeader(~{::title})">
+<title>Ajouter/modifier deal</title>
+</head>
+<body>
+	<div th:replace="fragments/admin_header :: admin_header"></div>
+
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Bienvenue Admin , Ajouter un deal</h1>
+
+	</div>
+	<div class="container">
+
+		<form th:action="@{/admin/deals/add}" method="post"
+			th:object="${deal}" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-sm-5">
+
+					<input type="hidden" name="id" th:field="*{id}">
+					<div class="form-group">
+						<label for="name">Nom</label> <input type="text"
+							class="form-control" required th:field="*{nom}" name="name"
+							id="name" placeholder="Nom">
+
+					</div>
+					<div class="form-group">
+						<label for="category">Choisir une categorie</label> <select
+							class="form-control" th:field="*{categorie}" id="category"
+							name="category">
+							<option th:each="category :${categorie}"
+								th:value="${category.id}" th:text="${category.nom}">
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>Description</label> <input type="text" class="form-control"
+							required th:field="*{description}" name="description"
+							id="description" placeholder="Description">
+					</div>
+
+
+					<div class="form-group">
+						<label>Ancien prix</label> <input type="number"
+							class="form-control" required th:field="*{ancien_prix}"
+							name="ancien_price" id="ancien_price" placeholder="Ancien prix">
+					</div>
+					<div class="form-group">
+						<label>Pourcentage</label> <input type="number"
+							class="form-control" required th:field="*{pourcentage}"
+							name="pourcentage" id="pourcentage" placeholder="Pourcentage">
+					</div>
+					<div class="form-group">
+						<label>Nouveau prix</label> <input type="number"
+							class="form-control" required th:field="*{nouveau_prix}"
+							name="nouveau_prix" id="nouveau_prix" placeholder="nouveau prix">
+					</div>
+
+					<div class="form-group">
+						<label>Date fin</label> <input type="date" class="form-control"
+							required th:field="*{temps_rest}" name="temps restant"
+							id="temps_restant" placeholder="Date fin">
+					</div>
+
+					<div class="form-group">
+						<label>Quantité</label> <input type="number" class="form-control"
+							required th:field="*{quantite}" name="qtt" id="qtt"
+							placeholder="Quantité">
+					</div>
+
+
+				</div>
+				<div class="col-sm-5">
+					<p>Image</p>
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" name="img"
+							accept="image/jpeg, image/png,image/jpg" id="image"/> 
+						<label
+							class="custom-file-label" for="image">Choisir un
+							fichier</label>
+					</div>
+					<div class="form-group">
+						<img id="imgPreview" th:src="@{${deal.image}}"
+							style="margin-top: 20px;height:100%; width:100%;" alt=" ">
+					</div>
+					<button type="submit" class="btn btn-primary">Sauvegarder</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script>
+    function readURL(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#imgPreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0])
+        }
+    }
+    $('#image').change(function(){
+        readURL(this);
+    });
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+</body>
+</html>

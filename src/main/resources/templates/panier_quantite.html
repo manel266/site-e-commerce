@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<head th:replace="fragments/header :: baseHeader(~{::title})">
+	<title>Panier ajouter quantite</title>
+
+</head>
+</head>
+<body>
+	<script>
+         function reserver() {
+		     alert("Vous avez reserve ce deal");  
+		 }
+    </script>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Bienvenue , Les d&eacutetails d'un deal</h1>
+
+	</div>
+	<div class="container mt-5">
+		<div class="row" style="margin-top: 20px">
+			<div class="col-sm-5 d-flex justify-content-center">
+				<img id="imgPreview" th:src="@{${deal.image}}"
+							style="margin-top: 20px;height:100%; width:100%;" alt=" ">
+			</div>
+			<div class="col-sm-7 mt-5">
+				<h2 th:text="${deal.nom}"></h2>
+
+				<h4>
+					<span th:text="${deal.nouveau_prix}" style="color: #FF0000"></span>
+					DT au lieu de <span th:text="${deal.ancien_prix}"></span> DT
+				</h4>
+				</h4>
+
+				<p th:text="${deal.description}"></p>
+				Date fin :
+				<h5 style="color: #FF0000" th:text="${deal.temps_rest}"></h5>
+				<form th:action="@{/commande/panier/add}" method="post">
+					<input type="hidden" name="id" th:field="${deal.id}">
+					
+					<div class="md-form md-outline mt-2">
+						<label for="form18">Quantite </label> <input type="number" name="quantite" min="0"
+							th:max="${deal.quantite}" required id="form18"
+							class="form-control">
+
+					</div>
+					<button type="submit" class="btn btn-primary" onclick="return reserver();">Ajouter au panier</button>
+					<div class="md-form md-outline mt-2">
+        <label for="form18">Donner un avis
+            <input type="number" min="0" max="5"required id="form1"  class="form-control"></label>
+
+    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

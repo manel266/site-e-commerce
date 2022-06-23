@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin_header :: baseHeader(~{::title})">
+	<title>Liste utilisateurs</title>
+</head>
+<body>
+<div th:replace="fragments/admin_header :: admin_header"></div>
+<div class="jumbotron text-center">
+    <h1 class="display-4">Bienvenue Admin  ,  Les clients</h1>
+</div>
+<div class="container">
+
+    <a th:href="@{/admin/users/add}" style="margin: 20px 0" class="btn btn-primary">Ajouter un client</a>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mot de passe</th>
+            <th scope="col">Supprimer</th>
+            <th scope="col">Modifier</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="user, iStat : ${user}">
+            <th scope="row" th:text="${iStat.index + 1}"></th>
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.nom}"></td>
+            <td th:text="${user.prenom}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.password}"></td>
+            <td><a href="" th:href="@{/admin/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Supprimer</a></td>
+            <td><a href="" th:href="@{/admin/users/update/{id}(id=${user.id})}" class="btn btn-warning">Modifier</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

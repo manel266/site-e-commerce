@@ -1,0 +1,19 @@
+version: "3"
+services:
+  ppe:
+    image: khouloudfrikha/ppe:1.0.0
+    depends_on:
+      - mysqldb
+    ports:
+      - "8080:8080"
+  mysqldb:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=db_ppe
+      - MYSQL_USER=ppe
+      - MYSQL_PASSWORD=ppe
+    ports:
+      - "3307:3306"
+    volumes:
+    - ./data:/var/lib/mysql

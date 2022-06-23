@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin_header :: baseHeader(~{::title})">
+	<title>Liste deals</title>
+</head>
+<body>
+	<div th:replace="fragments/admin_header :: admin_header"></div>
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Bienvenue Admin , Les Deals</h1>
+
+	</div>
+	<div class="container-fluid">
+
+		<a th:href="@{/admin/deals/add}" style="margin: 20px 0"
+			class="btn btn-primary">Ajouter un deal</a>
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Deal</th>
+					<th scope="col">Description</th>
+					<th scope="col">Ancien prix</th>
+					<th scope="col">Pourcentage</th>
+					<th scope="col">Nouveau prix</th>
+					<th scope="col">Date fin</th>
+					<th scope="col">Quantite</th>
+					<th scope="col">Image</th>
+					<th scope="col">Afficher</th>
+					<th scope="col">Modifier</th>
+					<th scope="col">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="deal: ${deals}">
+					<td th:text="${deal.id}"></td>
+					<td th:text="${deal.nom}"></td>
+					<td th:text="${deal.description}"></td>
+					<td th:text="${deal.ancien_prix}"></td>
+					<td th:text="${deal.pourcentage}"></td>
+					<td th:text="${deal.nouveau_prix}"></td>
+					<td th:text="${deal.temps_rest}"></td>
+					<td th:text="${deal.quantite}"></td>
+					<td><img height="100px" width="100px"
+						th:src="@{${deal.image}}"></td>
+
+					<td><a href=""
+						th:href="@{/admin/deals/view/{id}(id=${deal.id})}"
+						class="btn btn-primary">Afficher</a></td>
+					<td><a href=""
+						th:href="@{/admin/deals/update/{id}(id=${deal.id})}"
+						class="btn btn-warning">Modifier</a></td>
+					<td><a href=""
+						th:href="@{/admin/deals/delete/{id}(id=${deal.id})}"
+						class="btn btn-danger">Supprimer</a></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

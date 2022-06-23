@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Bienvenue , Les d&eacutetails d'un deal</h1>
+
+	</div>
+	<div class="container mt-5">
+		<div class="row" style="margin-top: 20px" th:each="product : ${deal}">
+			<div class="col-sm-5 d-flex justify-content-center">
+				<img class="mt-5" height="300px" width="300px"
+					th:src="/toto.png" alt="">
+			</div>
+			<div class="col-sm-7 mt-5">
+				<h2 th:text="${deal.nom}"></h2>
+
+				<h4>
+					<span th:text="${deal.nouveau_prix}" style="color: #FF0000"></span>
+					DT au lieu de <span th:text="${product.ancien_prix}"></span> DT
+				</h4>
+				</h4>
+
+				<p th:text="${deal.description}"></p>
+				Date fin :
+				<h5 style="color: #FF0000" th:text="${deal.temps_rest}"></h5>
+				<form th:action="@{/qtte}" method="get">
+					<div class="md-form md-outline mt-2">
+						<label for="form18">Quantite </label> <input type="number" min="0"
+							th:max="${product.quantite}" required id="form18"
+							class="form-control">
+
+					</div>
+				</form>
+
+				<a
+					th:href="@{/commande/panier/add/{id}(id = ${deal.id})}"
+					class="btn btn-primary">Ajouter au panier</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
